@@ -11,7 +11,15 @@
         'language'          => 'English',
         'email'             => 'Email',
         'not'               => '',
-        'addNew'            => 'Add new'
+        'addNew'            => 'Add new',
+        'woking_days'=>'Working Days',
+        'saturday'=>'Saturday',
+        'sunday'=>'Sunday',
+        'monday'=>'Monday',
+        'tuesday'=>'Tuesday',
+        'wednesday'=>'Wednesday',
+        'thursday'=>'Thursday',
+        'friday'=>'Friday'
 		
     ];
 

@@ -28,12 +28,12 @@
     {{-- Custom CSS --}}
   </head>
   <body>
-    <div class="toggled" id="wrapper">
+    <div >
       <div class="layout_sidebar">
         <div class="wrapper">
           
           <div class="full-body">
-            <div class="overlay-toggle-up"></div>
+            {{-- <div class="overlay-toggle-up"></div> --}}
             <!-- sidebar-->
             <!-- ==============================================================-->
             <!-- ============================SIDEBAR==============================-->
