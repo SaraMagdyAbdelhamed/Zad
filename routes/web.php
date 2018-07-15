@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'DaysController@index')->name('index'); 
+Route::post('/sessions', 'DaysController@session')->name('sessions'); 
