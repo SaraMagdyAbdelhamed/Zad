@@ -75,7 +75,25 @@
     <!-- =============== APP MAIN SCRIPTS ===============-->
     
     <script type="text/javascript" src="{{ asset('js/scripts.min.js') }}"></script>
+    <script type="text/javascript">
+      $(function () {
+        $('.datepicker-popup').pickadate();
+        $('.timepicker-popup').pickatime();
+      });
+      
+    </script>
+    <script type="text/javascript">
+      $(function () {
+        $('.datepicker').datepicker({autoclose: true});
+        $(".timepicker").timepicker({showInputs: false});
+      });
+      
+    </script>
     <script>
+     $(function () {
+        $('.date_range_picker').daterangepicker();
+        $('.date_time_range_picker').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+      });
        $(document).ready(function() {
         $(window).keydown(function(event){
           if(event.keyCode == 13) {

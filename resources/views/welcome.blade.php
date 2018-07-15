@@ -20,14 +20,17 @@
 {{ csrf_field() }}
 
     <div class="col-sm-12 col-xs-12">
-    <label class="master_label mandatory">Starting Day</label>
+    <label class="master_label mandatory">Starting Date</label>
 
-    <select name="start_day" class="master_input select2" id="main_type" >
+    <!-- <select name="start_day" class="master_input select2" id="main_type" required>
         <option value="choose" selected disabled>Choose Starting Day </option>
         @foreach($days as $day)
       <option value="{{$day->id}}">{{$day->day}}</option>
          @endforeach                            
-    </select>
+    </select> -->
+    <div class="bootstrap-timepicker">
+ <input class="datepicker master_input required" type="text" placeholder="starting date"  name="start_date" required>
+     </div>
     </div>
      <div class="col-sm-12 col-xs-12">
         <div class="master_field">
@@ -65,15 +68,15 @@
 
     <div class="col-sm-12 col-xs-12">
       <div class="master_field">
-        <label class="master_label mandatory" for="type_main">Numbers of Sessions </label>
-      <input name="sessions"  class="master_input" type="number" placeholder="Type numbers of sessions" >
+        <label class="master_label " for="type_main">Numbers of Sessions </label>
+      <input required name="sessions"  class="master_input" type="number" placeholder="Type numbers of sessions" >
        </div>
     </div>
 
     <div class="clearfix"></div><br>
      <div class="text-center">
            
-     <button name="submit" value="one" class="sotre-sub remodal-confirm" type="submit">Calculate Sessions</button>
+     <button name="submit" value="submit" class="sotre-sub remodal-confirm" type="submit">Calculate Sessions</button>
     </div>
 </form>
 </div>
