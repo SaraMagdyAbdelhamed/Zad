@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Day;
+use Illuminate\Support\Facades\Validator;
 class DaysController extends Controller
 {
     public function index()
@@ -15,7 +16,20 @@ class DaysController extends Controller
 
     public function session(Request $request)
     {
-       
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'required',
+            'days' => 'required',
+            'sessions' => 'required'
+            
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
        $start_date = $request['start_date'];
         $unixTimestamp = strtotime($start_date);
         $startDayOfWeek = date("l", $unixTimestamp);

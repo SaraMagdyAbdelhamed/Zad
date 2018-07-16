@@ -30,7 +30,12 @@
     </select> -->
     <div class="bootstrap-timepicker">
  <input class="datepicker master_input required" type="text" placeholder="starting date"  name="start_date" required>
-     </div>
+ <span class="master_message color--black">
+                               @if ($errors->has('start_date'))
+                                    {{ $errors->first('start_date')}}
+                                    @endif
+                            </span>
+</div>
     </div>
      <div class="col-sm-12 col-xs-12">
         <div class="master_field">
@@ -63,6 +68,11 @@
                                 <input type="checkbox" name="days[7]" id="Opening_days_7">
                                 <label for="Opening_days_7">@lang('keywords.friday')</label>
                               </div>
+                              <span class="master_message color--black">
+                               @if ($errors->has('days'))
+                                    {{ $errors->first('days')}}
+                                    @endif
+                            </span>
          </div>
        </div>
 
@@ -70,7 +80,12 @@
       <div class="master_field">
         <label class="master_label " for="type_main">Numbers of Sessions </label>
       <input required name="sessions"  class="master_input" type="number" placeholder="Type numbers of sessions" >
-       </div>
+      <span class="master_message color--black">
+                               @if ($errors->has('sessions'))
+                                    {{ $errors->first('sessions')}}
+                                    @endif
+                            </span>
+    </div>
     </div>
 
     <div class="clearfix"></div><br>
