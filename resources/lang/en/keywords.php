@@ -3,7 +3,7 @@
     // keywords array
     return [
         // general names
-        'website_name'      => 'Eventakom',
+        'website_name'      => 'Zad',
         'login_page_name'   => 'Login',
         'login_username'    => 'username',
         'login_password'    => 'password',

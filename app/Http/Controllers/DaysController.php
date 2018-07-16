@@ -15,34 +15,74 @@ class DaysController extends Controller
 
     public function session(Request $request)
     {
-        //Our YYYY-MM-DD date string.
-       $date = $request['start_date'];
- 
-        //Convert the date string into a unix timestamp.
-        $unixTimestamp = strtotime($date);
- 
-        //Get the day of the week using PHP's date function.
-        $dayOfWeek = date("l", $unixTimestamp);
- 
+       
+       $start_date = $request['start_date'];
+        $unixTimestamp = strtotime($start_date);
+        $startDayOfWeek = date("l", $unixTimestamp);
+        $start_day_id=Day::where('day',strtolower($startDayOfWeek))->first();
+        $data['total_days_in_weeks']=self::calculate_sessions($request , $start_day_id->id , $start_date);
+        
+        // dd($data);
+        return view('sessions' , $data);
+    }
 
-        $sessions=round(30/$request['sessions'],0, PHP_ROUND_HALF_UP);
+    public function calculate_sessions($request ,  $start_day_id , $start_date)
+    {
+        $sessions=$request['sessions'];
+        $number_of_chapters_in_one_session=round(30/$request['sessions'],0, PHP_ROUND_HALF_UP);
         $days=count($request['days']);
+        $chapters=30;
         foreach($request['days'] as $key=>$day)
         {
             $days_array[]=$key;
         }
          $j=0;
+         if($days_array[0] >= $start_day_id)
+         {
+             $count = $days_array[0]-$start_day_id;
+         }
+         else
+         {
+             $count=7 - ($start_day_id - $days_array[0]);
+         }
+        //  $count=0;
         for($i=$sessions;$i>0;$i--)
         {
             if($j == ($days))
             {
                 $j=0;
+                $count +=7;
             }
-            $total_session[]=$days_array[$j];
+            $total_session_dates['day_name']=(Day::find($days_array[$j]))->day;
+            // $days_added_in_week=($start_day_id-$days_array[$j]);
+            // if($days_added_in_week < 0)
+            // {
+            //     $days_added_in_week *= -1;
+                
+            // }
+            if($i==$sessions)
+            {
+                $added_days=$count;
+            }
+            else
+            {
+                $added_days=$count+$days_array[$j]-$days_array[0];
+            }
+            if($number_of_chapters_in_one_session < $chapters)
+            {
+                $total_session_dates['number_of_chapters'] = $number_of_chapters_in_one_session;
+                $chapters -= $number_of_chapters_in_one_session;
+            }
+            else
+            {
+                $total_session_dates['number_of_chapters'] = $chapters;
+
+            }
+            $total_session_dates['day_date']=date('Y-m-d', strtotime($start_date. ' + '.$added_days .'days'));
+            $total_sessions[]=$total_session_dates;
             $j++;
         }
-        // $data['sessions']=$total_session;
-        //  dd( $dayOfWeek);
-        return view('sessions' , $data);
+
+        return $total_sessions;
     }
 }

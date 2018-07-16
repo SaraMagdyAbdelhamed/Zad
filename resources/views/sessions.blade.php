@@ -16,6 +16,28 @@
                     </div>
                     </div>
 <div class="cover-inside-container margin--small-top-bottom bradius--no bshadow--0">
-
+<table class="table table-striped table-bordered" >
+                          <thead>
+                            <tr class="bgcolor--gray_mm color--gray_d">
+                              <th style="text-align:center;"><span class="cellcontent">Day</th>
+                              <th style="text-align:center;"><span class="cellcontent">Date</span></th>
+                              <th style="text-align:center;"><span class="cellcontent">Number Of Chapters</span></th>
+                              
+                            </tr>
+                          </thead>
+                          <tbody>
+                             @foreach($total_days_in_weeks as $day)
+                          <tr >
+                           
+                            <td><span class="cellcontent">{{$day['day_name']}}</td>
+                            
+                            <td><span class="cellcontent">{{$day['day_date']}}</span></td>
+                            <td><span class="cellcontent">{{$day['number_of_chapters']}}</span></td>
+                            
+                          </tr>
+                          @endforeach
+                            
+                          </tbody>
+                        </table>
 </div>
 @endsection
