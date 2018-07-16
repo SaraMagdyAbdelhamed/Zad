@@ -35,17 +35,17 @@ class DaysController extends Controller
         $startDayOfWeek = date("l", $unixTimestamp);
         $start_day_id=Day::where('day',strtolower($startDayOfWeek))->first();
         $data['total_days_in_weeks']=self::calculate_sessions($request , $start_day_id->id , $start_date);
-        
+        $data['number_of_sessions']=$request['sessions'];
         // dd($data);
         return view('sessions' , $data);
     }
 
     public function calculate_sessions($request ,  $start_day_id , $start_date)
     {
-        $sessions=$request['sessions'];
-        $number_of_chapters_in_one_session=round(30/$request['sessions'],0, PHP_ROUND_HALF_UP);
+        $sessions=$request['sessions']*30;
+        // $number_of_chapters_in_one_session=round(30/$request['sessions'],0, PHP_ROUND_HALF_UP);
         $days=count($request['days']);
-        $chapters=30;
+         $chapter=$request['sessions'];
         foreach($request['days'] as $key=>$day)
         {
             $days_array[]=$key;
@@ -59,7 +59,7 @@ class DaysController extends Controller
          {
              $count=7 - ($start_day_id - $days_array[0]);
          }
-        //  $count=0;
+          $chapter_number=1;
         for($i=$sessions;$i>0;$i--)
         {
             if($j == ($days))
@@ -82,14 +82,18 @@ class DaysController extends Controller
             {
                 $added_days=$count+$days_array[$j]-$days_array[0];
             }
-            if($number_of_chapters_in_one_session < $chapters)
+            if($chapter ==  0 )
             {
-                $total_session_dates['number_of_chapters'] = $number_of_chapters_in_one_session;
-                $chapters -= $number_of_chapters_in_one_session;
+                $chapter=$request['sessions'];
+                $chapter_number ++;
+                $total_session_dates['chapter'] = "Chapter".$chapter_number;
+                
+                $chapter--;
             }
             else
             {
-                $total_session_dates['number_of_chapters'] = $chapters;
+                $total_session_dates['chapter'] = "Chapter".$chapter_number;
+                $chapter--;
 
             }
             $total_session_dates['day_date']=date('Y-m-d', strtotime($start_date. ' + '.$added_days .'days'));

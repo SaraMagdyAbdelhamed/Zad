@@ -21,7 +21,7 @@
                             <tr class="bgcolor--gray_mm color--gray_d">
                               <th style="text-align:center;"><span class="cellcontent">Day</th>
                               <th style="text-align:center;"><span class="cellcontent">Date</span></th>
-                              <th style="text-align:center;"><span class="cellcontent">Number Of Chapters</span></th>
+                              <th style="text-align:center;"><span class="cellcontent">Chapter</span></th>
                               
                             </tr>
                           </thead>
@@ -32,7 +32,7 @@
                             <td><span class="cellcontent">{{$day['day_name']}}</td>
                             
                             <td><span class="cellcontent">{{$day['day_date']}}</span></td>
-                            <td><span class="cellcontent">{{$day['number_of_chapters']}}</span></td>
+                            <td><span class="cellcontent">{{$day['chapter']}}</span></td>
                             
                           </tr>
                           @endforeach
